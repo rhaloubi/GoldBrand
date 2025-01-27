@@ -19,7 +19,7 @@ const Login = () => {
     useEffect(() => {
         const fetchCsrfToken = async () => {
             try {
-                await axios.get('https://api.clarodigi.com/sanctum/csrf-cookie');
+                await axios.get(`${import.meta.env.REACT_API_URL}/sanctum/csrf-cookie`);
             } catch (error) {
                 console.error('Error fetching CSRF token:', error);
             }
@@ -33,7 +33,7 @@ const Login = () => {
         setLoading(true); // Set loading to true when the login request starts
 
         try {
-            const response = await axios.post('https://api.clarodigi.com/api/login', {
+            const response = await axios.post(`${import.meta.env.REACT_API_URL}/api/login`, {
                 email,
                 password,
             });

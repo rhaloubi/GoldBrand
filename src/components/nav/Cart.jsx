@@ -74,7 +74,7 @@ function SidebarCart() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('https://api.clarodigi.com/api/products');
+        const response = await axios.get(`${import.meta.env.REACT_API_URL}/api/products`);
         const romperProducts = response.data.filter(product => product.category === 'T-shirt');
         const firstFiveRomperProducts = romperProducts.slice(0, 5);
         setProducts(firstFiveRomperProducts);
@@ -151,7 +151,7 @@ function SidebarCart() {
                         <div className="p-4 bg-black border-b sm:p-6 border-white"
                             onClick={handleProductClick}>
                         <img 
-                            src={`https://api.clarodigi.com/storage/${product.images[0]?.image_path}`} 
+                            src={`${import.meta.env.REACT_API_URL}/storage/${product.images[0]?.image_path}`} 
                             alt={product.name} 
                             className="w-full h-80 object-cover" 
                         />

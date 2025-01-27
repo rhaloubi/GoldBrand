@@ -16,7 +16,7 @@ const ProductSection = () => {
     // Fetch all products from the backend
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('https://api.clarodigi.com/api/products');
+        const response = await axios.get(`${import.meta.env.REACT_API_URL}/api/products`);
         const sortedProducts = response.data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
         const lastEightProducts = sortedProducts.slice(0, 8);
         setProducts(lastEightProducts);
@@ -170,7 +170,7 @@ const ProductImageTransition = ({ image1, image2, logo, isHovered }) => {
   >
     <img
       ref={imageRef}
-      src={isHovered ? `https://api.clarodigi.com/storage/${image2}` : `https://api.clarodigi.com/storage/${image1}`}
+      src={isHovered ? `${import.meta.env.REACT_API_URL}/storage/${image2}` : `${import.meta.env.REACT_API_URL}/storage/${image1}`}
       alt="Product Image"
       className="w-full h-full object-contain"
     />

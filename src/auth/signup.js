@@ -20,7 +20,7 @@ const Signup = () => {
     useEffect(() => {
         const fetchCsrfToken = async () => {
             try {
-                await axios.get('https://gbr.clarodigi.com/sanctum/csrf-cookie');
+                await axios.get(`${import.meta.env.REACT_API_URL}/sanctum/csrf-cookie`);
             } catch (error) {
                 console.error('Error fetching CSRF token:', error);
             }
@@ -35,7 +35,7 @@ const Signup = () => {
 
         try {
             // Send signup request
-            const response = await axios.post('https://api.clarodigi.com/api/register', {
+            const response = await axios.post(`${import.meta.env.REACT_API_URL}/api/register`, {
                 name,
                 last_name,
                 email,

@@ -265,7 +265,7 @@ const AllProduct = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('https://api.clarodigi.com/api/products');
+        const response = await axios.get(`${import.meta.env.REACT_API_URL}/api/products`);
         const sortedProducts = sortProducts(response.data, sortOption);
         setProducts(sortedProducts);
   
@@ -646,7 +646,7 @@ const ProductImageTransition = ({ image1, image2, logo, isHovered }) => {
     >
       <img
         ref={imageRef}
-        src={isHovered ? `https://api.clarodigi.com/storage/${image2}` : `https://api.clarodigi.com/storage/${image1}`}
+        src={isHovered ? `${import.meta.env.REACT_API_URL}/storage/${image2}` : `${import.meta.env.REACT_API_URL}/storage/${image1}`}
         alt="Product Image"
         className=' md:top-5 top-[20px]'
         style={{
