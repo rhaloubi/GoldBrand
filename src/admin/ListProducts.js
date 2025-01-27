@@ -17,7 +17,7 @@ const ListProducts = () => {
         const fetchProducts = async () => {
             const token = localStorage.getItem('authToken');
             try {
-                const response = await axios.get('https://api.clarodigi.com/api/products', {
+                const response = await axios.get(`${import.meta.env.REACT_API_URL}/api/products`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -65,7 +65,7 @@ const ListProducts = () => {
 
         if (confirmDelete) {
             try {
-                await axios.delete(`https://api.clarodigi.com/api/products/${productId}`, {
+                await axios.delete(`${import.meta.env.REACT_API_URL}/api/products/${productId}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -127,7 +127,7 @@ const ListProducts = () => {
                             <div className="flex items-center">
                                 {product.images && product.images.length > 0 && (
                                     <img
-                                        src={`https://api.clarodigi.com/storage/${product.images[0].image_path}`} 
+                                        src={`${import.meta.env.REACT_API_URL}/storage/${product.images[0].image_path}`} 
                                         alt={product.name}
                                         className="w-16 h-16 object-cover rounded-lg mr-4"
                                     />

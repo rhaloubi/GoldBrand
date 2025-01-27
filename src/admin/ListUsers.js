@@ -11,7 +11,7 @@ const ListUsers = () => {
         const fetchUsers = async () => {
             const token = localStorage.getItem('authToken');
             try {
-                const response = await axios.get('https://api.clarodigi.com/api/users', {
+                const response = await axios.get(`${import.meta.env.REACT_API_URL}/api/users`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -34,7 +34,7 @@ const ListUsers = () => {
 
         if (confirmDelete) {
             try {
-                await axios.delete(`https://api.clarodigi.com/api/users/${userId}`, {
+                await axios.delete(`${import.meta.env.REACT_API_URL}/api/users/${userId}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },

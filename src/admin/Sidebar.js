@@ -11,7 +11,7 @@ const Sidebar = () => {
     const handleLogout = async () => {
         const token = localStorage.getItem('authToken');
         try {
-            await axios.post('https://api.clarodigi.com/api/logout', {}, {
+            await axios.post(`${import.meta.env.REACT_API_URL}/api/logout`, {}, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

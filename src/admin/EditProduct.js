@@ -31,7 +31,7 @@ const EditProduct = () => {
         const fetchProduct = async () => {
             const token = localStorage.getItem('authToken');
             try {
-                const response = await axios.get(`https://api.clarodigi.com/api/products/${id}`, {
+                const response = await axios.get(`${import.meta.env.REACT_API_URL}/api/products/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -112,7 +112,7 @@ const EditProduct = () => {
 
         try {
             const token = localStorage.getItem('authToken');
-            const response = await axios.put(`https://api.clarodigi.com/api/products/${id}`, data, {
+            const response = await axios.put(`${import.meta.env.REACT_API_URL}/api/products/${id}`, data, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                 },

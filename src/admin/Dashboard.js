@@ -83,7 +83,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('https://api.clarodigi.com/api/products');
+        const response = await axios.get(`${import.meta.env.REACT_API_URL}/api/products`);
         const products = response.data;
 
         // Process the data to get category counts

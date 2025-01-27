@@ -73,7 +73,7 @@ const AddProduct = () => {
 
         try {
             const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
-            const response = await axios.post('https://api.clarodigi.com/api/products', form, {
+            const response = await axios.post(`${import.meta.env.REACT_API_URL}/api/products`, form, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${token}`, // Include the token in the Authorization header
