@@ -11,3 +11,31 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+main {
+  /* overflow: hidden; */
+  box-sizing: border-box;
+}
+.main-wrap {
+  will-change: transform;
+  box-sizing: border-box;
+}
+
+.section {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+  position: relative;
+}
+.section-home-header {
+  overflow: hidden;
+}
+
+
+@media screen and (min-width: 1025px) {
+  .section-home-header.full-height .container {
+     padding-bottom: calc(var(--vh) * 15);
+  }
+
+  .section-home-header .single-vimeo-background {
+     --parent-height: 115;
+  }
+}
