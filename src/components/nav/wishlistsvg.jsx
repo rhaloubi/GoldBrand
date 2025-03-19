@@ -11,7 +11,7 @@ const WishlistIcon = () => {
         const fetchWishlistCount = async () => {
             if (authToken) {
                 try {
-                    const response = await axios.get(`${import.meta.env.REACT_API_URL}/api/wishlist/count`, {
+                    const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/wishlist/count`, {
                         headers: {
                             Authorization: `Bearer ${authToken}`
                         }

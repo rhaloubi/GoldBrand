@@ -28,7 +28,7 @@ function ProductPage({ }) {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.REACT_API_URL}/api/products/${id}`);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/products/${id}`);
         setProduct(response.data);
       } catch (error) {
         console.error('Error fetching product:', error);
@@ -111,7 +111,7 @@ function ProductPage({ }) {
       const token = localStorage.getItem('authToken');
       try {
         await axios.post(
-          `${import.meta.env.REACT_API_URL}/api/wishlist/add`,
+          `${process.env.REACT_APP_API_URL}/api/wishlist/add`,
           { product_id: product.id },
           { headers: { Authorization: `Bearer ${token}` } }
         );

@@ -123,7 +123,7 @@ const Header = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.REACT_API_URL}/api/products`);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/products`);
         const romperProducts = response.data.filter(product => product.category === 'T-shirt');
         const firstFiveRomperProducts = romperProducts.slice(0, 5);
         setProducts(firstFiveRomperProducts);
@@ -559,7 +559,7 @@ const ProductImageTransition = ({ image1, image2, isHovered }) => {
     <div className="w-full h-80 md:h-80  relative bg-white flex justify-center items-center border-2 border-white overflow-hidden">
       <img
         ref={imageRef}
-        src={isHovered ? `${import.meta.env.REACT_API_URL}/storage/${image2}` : `${import.meta.env.REACT_API_URL}/storage/${image1}`}
+        src={isHovered ? `${process.env.REACT_APP_API_URL}/storage/${image2}` : `${process.env.REACT_APP_API_URL}/storage/${image1}`}
         alt="Product Image"
         className="w-full h-full object-contain"
       />

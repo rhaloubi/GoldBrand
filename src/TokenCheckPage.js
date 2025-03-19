@@ -17,7 +17,7 @@ const TokenCheckPage = () => {
             }
 
             try {
-                const response = await axios.get(`${import.meta.env.REACT_API_URL}/api/user`, {
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/user`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

@@ -64,7 +64,8 @@ const Home = () => {
                             <path
                               d="M12.8921 19.2393H5.70438V0.405971H25.3782V19.5275L12.6687 39.594H0.73768L13.2351 19.8625L13.6298 19.2393H12.8921ZM43.0957 19.2393H35.9081V0.405971H55.5818V19.5275L42.8723 39.594H30.9413L43.4387 19.8625L43.8334 19.2393H43.0957Z"
                               stroke="#001514"
-                              strokeWidth="0.811942"
+                              strokeWidth="0.811942"  // Changed from stroke-width
+                              strokeLinejoin="round"  // Changed from stroke-linejoin if present
                             />
                           </svg>
                         </div>{" "}

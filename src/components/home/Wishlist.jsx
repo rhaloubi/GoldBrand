@@ -20,7 +20,7 @@ const Wishlist = () => {
         const fetchWishlistItems = async () => {
             const token = localStorage.getItem('authToken');
             try {
-                const response = await axios.get(`${import.meta.env.REACT_API_URL}/api/wishlist/items`, {
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/wishlist/items`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -45,7 +45,7 @@ const Wishlist = () => {
 
         if (confirmDelete) {
             try {
-                await axios.delete(`${import.meta.env.REACT_API_URL}/api/wishlist/remove?product_id=${productId}`, {
+                await axios.delete(`${process.env.REACT_APP_API_URL}/api/wishlist/remove?product_id=${productId}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                         'Content-Type': 'application/json'
@@ -95,7 +95,7 @@ const Wishlist = () => {
             price: item.product.price,
             quantity: item.quantity,
             size: selectedSizeForProduct,
-            image: `${import.meta.env.REACT_API_URL}/storage/${item.product.images[0]?.image_path}`, // Adjusted image URL format
+            image: `${process.env.REACT_APP_API_URL}/storage/${item.product.images[0]?.image_path}`, // Adjusted image URL format
         };
     
         // Retrieve existing cart items from localStorage
@@ -131,7 +131,7 @@ const Wishlist = () => {
                                     <div className="relative">
                                         {item.product.images && item.product.images.length > 0 && (
                                             <img 
-                                                src={`${import.meta.env.REACT_API_URL}/storage/${item.product.images[0].image_path}`} 
+                                                src={`${process.env.REACT_APP_API_URL}/storage/${item.product.images[0].image_path}`} 
                                                 alt={item.product.name}
                                                 className="w-full h-[300px] object-cover rounded-md mb-4"
                                             />

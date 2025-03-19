@@ -15,7 +15,7 @@ const Tshirts = () => {
     // Fetch T-shirt products from the backend
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.REACT_API_URL}/api/products`);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/products`);
         const tShirtProducts = response.data.filter(product => product.category === 'Swimwear');
         const lastEightProducts = tShirtProducts.slice(0, 8);
         setProducts(lastEightProducts);
@@ -165,7 +165,7 @@ const ProductImageTransition = ({ image1, image2, logo, isHovered }) => {
   >
     <img
       ref={imageRef}
-      src={isHovered ? `${import.meta.env.REACT_API_URL}/storage/${image2}` : `${import.meta.env.REACT_API_URL}/storage/${image1}`}
+      src={isHovered ? `${process.env.REACT_APP_API_URL}/storage/${image2}` : `${process.env.REACT_APP_API_URL}/storage/${image1}`}
       alt="Product Image"
       className="w-full h-full object-contain"
     />
