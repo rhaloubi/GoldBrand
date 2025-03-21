@@ -6,6 +6,7 @@ services:
       context: .
       dockerfile: docker/php/Dockerfile
     container_name: laravel-backend
+    user: root
     restart: unless-stopped
     volumes:
       - ./:/var/www/html
@@ -20,7 +21,10 @@ services:
       - db
     command: >
       sh -c "
-        chmod -R 775 /var/www/html/storage &&
+        mkdir -p /var/www/html/storage/framework/{sessions,views,cache} &&
+        mkdir -p /var/www/html/storage/logs &&
+        composer install --no-interaction --no-plugins --no-scripts &&
+        chmod -R 777 /var/www/html/storage &&
         chown -R www-data:www-data /var/www/html/storage &&
         php artisan storage:link &&
         php-fpm"
@@ -31,10 +35,12 @@ services:
     restart: unless-stopped
     ports:
       - "8000:80"
+      - "443:443"
     volumes:
       - ./:/var/www/html
       - ./storage/app/public:/var/www/html/storage/app/public
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/certs:/etc/nginx/certs
     depends_on:
       - app    # Changed from 'backend' to 'app'
 
