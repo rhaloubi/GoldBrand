@@ -5,26 +5,29 @@ services:
     build:
       context: .
       dockerfile: docker/php/Dockerfile
-    image: laravel-app
-    container_name: laravel-app
+    container_name: laravel-backend
     restart: unless-stopped
     volumes:
       - ./:/var/www/html
       - ./storage/app/public:/var/www/html/storage/app/public
-    networks:
-      - laravel-network
     environment:
-      - DB_HOST=mysql
+      - DB_HOST=db
       - DB_PORT=3306
       - DB_DATABASE=test22
-      - DB_USERNAME=root
-      - DB_PASSWORD=secret
+      - DB_USERNAME=reda
+      - DB_PASSWORD=reda
     depends_on:
-      - mysql
+      - db
+    command: >
+      sh -c "
+        chmod -R 775 /var/www/html/storage &&
+        chown -R www-data:www-data /var/www/html/storage &&
+        php artisan storage:link &&
+        php-fpm"
 
-  webserver:
+  nginx:
     image: nginx:alpine
-    container_name: nginx-server
+    container_name: laravel-nginx
     restart: unless-stopped
     ports:
       - "8000:80"
@@ -32,49 +35,35 @@ services:
       - ./:/var/www/html
       - ./storage/app/public:/var/www/html/storage/app/public
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
-    networks:
-      - laravel-network
     depends_on:
-      - app
+      - app    # Changed from 'backend' to 'app'
 
-  mysql:
+  db:
     image: mysql:8.0
-    container_name: mysql-server
+    container_name: laravel-mysql
     restart: unless-stopped
+    ports:
+      - "3307:3306"  # Changed from 3306:3306 to use port 3307 on host
+    environment:
+      MYSQL_DATABASE: test22
+      MYSQL_USER: reda
+      MYSQL_PASSWORD: reda
+      MYSQL_ROOT_PASSWORD: reda
+      MYSQL_CHARACTER_SET_SERVER: utf8mb4
+      MYSQL_COLLATION_SERVER: utf8mb4_unicode_ci
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
     command:
       - --default-authentication-plugin=mysql_native_password
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_DATABASE: test22
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_CHARACTER_SET_SERVER: utf8mb4
-      MYSQL_COLLATION_SERVER: utf8mb4_unicode_ci
-    volumes:
-      - mysql-data:/var/lib/mysql
-    networks:
-      - laravel-network
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
-    restart: unless-stopped
-    ports:
-      - "8080:80"
-    environment:
-      PMA_HOST: mysql
-      MYSQL_ROOT_PASSWORD: secret
-    networks:
-      - laravel-network
-    depends_on:
-      - mysql
 
 volumes:
-  mysql-data:
+  mysql_data:
     driver: local
 
 networks:
-  laravel-network:
+  default:
+    name: laravel-network
     driver: bridge
